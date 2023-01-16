@@ -7,15 +7,47 @@ public class BankAccount {
     //all attributes should use private and should only be exposed to getter and setter 
     private final String accountNo; 
     private String fullName; 
-    private long balance = 0; 
+    private double balance = 0; 
     private boolean isActive = true; 
     private Date accountStartDate; 
     private Date accountEndDate;
 
-    //this is the constructor can use sourceaction 
+    //this is the constructor can use source action 
+    public BankAccount(String accountNo, double initialBalance) {
+        this.accountNo = accountNo;
+        this.balance = initialBalance;
+    }
+
     public BankAccount(String accountNo, String fullName) {
         this.accountNo = accountNo;
         this.fullName = fullName;
+    }
+
+
+
+    public void deposit (double amount){
+        if (!isActive){
+            throw new IllegalArgumentException("You cannot make deposit to a closed account"); 
+        }
+
+        if (amount < 0){
+            throw new IllegalArgumentException("You cannot make a negative deposit"); 
+        } else {
+            balance = balance + amount; 
+        }
+
+    }
+
+    public void withdraw(double amount){
+        if (!isActive){
+            throw new IllegalArgumentException("You cannot make deposit to a closed account"); 
+        }
+
+        if (amount < 0){
+            throw new IllegalArgumentException("You cannot make a negative deposit"); 
+        } else {
+            balance = balance + amount; 
+        }
     }
 
 
@@ -28,10 +60,10 @@ public class BankAccount {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    public long getBalance() {
+    public double getBalance() {
         return balance;
     }
-    public void setBalance(long balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
     public boolean isActive() {
@@ -52,6 +84,12 @@ public class BankAccount {
     public void setAccountEndDate(Date accountEndDate) {
         this.accountEndDate = accountEndDate;
     } 
+
+    public void showAccount(){
+        System.out.println("Account No: " + accountNo);
+        System.out.println("Full Name: " +fullName);
+        System.out.println("Balance: " +balance);
+    }
 
     
 
